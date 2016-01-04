@@ -105,7 +105,7 @@ confflags += --disable-sigrok
 
 # varnish does not currently work with varnish4
 # (c.f. https://bugs.debian.org/745902)
-confflags += --disable-varnish
+# confflags += --disable-varnish
 
 # libmongoc is required for the write_mongodb plugin.
 confflags += --disable-write_mongodb
@@ -192,6 +192,7 @@ config.status: configure $(DPATCH_STAMPFN)
 		/usr/lib/pkgconfig/OpenIPMIpthread.pc \
 		> debian/pkgconfig/OpenIPMIpthread.pc
 	
+	chmod 755 configure
 	PKG_CONFIG_PATH="$(CURDIR)/debian/pkgconfig:$$PKG_CONFIG_PATH" \
 	./configure $(confflags) CPPFLAGS="$(CPPFLAGS)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
 		JAVAC="$(JAVAC)" JAR="$(JAR)" JAVA_CPPFLAGS="$(JAVA_CPPFLAGS)" \

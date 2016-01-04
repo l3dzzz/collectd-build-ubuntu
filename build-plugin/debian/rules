@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+override_dh_install:
+	sh debian/deps.sh
+	# verify, don't build broken package
+	python plugins/signalfx_metadata.py once
+
+	find plugins
+	dh_install plugins/*  opt/signalfx-collectd-plugin
